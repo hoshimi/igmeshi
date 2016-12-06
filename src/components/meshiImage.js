@@ -21,7 +21,6 @@ class MeshiImage extends React.Component {
 
     onDrop(acceptedFiles, rejectedFiles) {
         this.setState({"preview": acceptedFiles[0].preview});
-        console.log(acceptedFiles[0]);
     }
 
     render() {
