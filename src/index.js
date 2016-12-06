@@ -1,6 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Grid, Col, Row, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
+// import ReactCanvas from 'react-canvas';
+// import {Surface, Image, Text} from 'react-canvas';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -33,7 +35,7 @@ class DetailForm extends React.Component {
     }
 
     handleChange(key, e) {
-        this.setState({key: e.target.value})
+        this.setState({[key]: e.target.value})
     }
 
     render() {
