@@ -12,3 +12,9 @@ div.mainContainer {
 .form-control {
     margin-top: 2px;
 }
+
+.closeButton {
+    width: 30px;
+    display: block;
+    margin-left: auto;
+}

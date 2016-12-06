@@ -93,7 +93,7 @@ class DetailForm extends React.Component {
     render() {
         return (
             <FormGroup controlId="meshiForm">
-            <Button block onClick={(event) => this.generateRandomEffect(event)} bsStyle="primary">めし効果生成(ランダム)</Button>
+            <Button onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">めし効果生成(ランダム)</Button>
 
             <hr/>
             <ControlLabel>料理名</ControlLabel>

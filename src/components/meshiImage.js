@@ -42,8 +42,8 @@ class MeshiImage extends React.Component {
                     </p>
                     </Dropzone>
                 :
-                    <div align="right">
-                        <i className="fa fa-times fa-4x" aria-hidden="true" onClick={(event) => this.onClickRemoveButton(event)}></i>
+                    <div>
+                        <i className="fa fa-times fa-2x closeButton" aria-hidden="true" onClick={(event) => this.onClickRemoveButton(event)}></i>
                         <MeshiImagePreview previewUrl={this.state.preview} meshiState={meshiState} />
                     </div>
             }
