@@ -14,8 +14,16 @@ class DetailForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidMount() {
+        this.props.onChangeMeshiState(this.state);
+    }
+
     handleChange(key, e) {
-        this.setState({[key]: e.target.value})
+        let newState = this.state;
+        newState[key] = e.target.value;
+
+        this.setState(newState);
+        this.props.onChangeMeshiState(newState);
     }
 
     render() {
