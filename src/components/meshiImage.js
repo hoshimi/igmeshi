@@ -1,7 +1,12 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import CanvasComponent from './canvas.js';
+
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 600;
 
 class MeshiImage extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -15,6 +20,7 @@ class MeshiImage extends React.Component {
     }
 
     render() {
+
         return (
         <div>
             <Dropzone
@@ -37,7 +43,24 @@ class MeshiImagePreview extends React.Component {
 
     render() {
         const {previewUrl} = this.props;
-        return <div><img src={previewUrl}/> </div>;
+
+        const canvasProps = {
+            width: CANVAS_WIDTH,
+            height: CANVAS_HEIGHT,
+            updateCanvas: (context) => {
+                const imageObject = new Image(CANVAS_WIDTH, CANVAS_HEIGHT);
+                imageObject.src = previewUrl;
+                imageObject.onload = () => {
+                    context.drawImage(imageObject, 0, 0);
+                }
+            },
+        }
+
+        return (
+            <div>
+                <CanvasComponent {...canvasProps} />
+            </div>
+        );
     }
 }
 
