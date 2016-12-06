@@ -6,6 +6,7 @@
 
     use Abraham\TwitterOAuth\TwitterOAuth;
 
+    $media_data = $_POST["data"];
     //セッションに入れておいたさっきの配列
     if(empty($_SESSION['access_token'])) {
         header('location: login.php');
@@ -16,11 +17,23 @@
     //OAuthトークンとシークレットも使って TwitterOAuth をインスタンス化
     $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
-    //ユーザー情報をGET
-    $user = $connection->get("account/verify_credentials");
-    //(ここらへんは、Twitter の API ドキュメントをうまく使ってください)
+    // 先頭のMIME情報を削除してBASE64デコード
+    $media_data = base64_decode(preg_replace('@^data:image/[^;]*+;base64,@', '', $media_data));
 
-    //GETしたユーザー情報をvar_dump
-    var_dump( $user );
+    // 一時ファイルへ書き込み
+    $tmpfname = tempnam("/tmp", "IGM");
+    $handle = fopen($tmpfname, "w");
+    fwrite($handle, $media_data);
+    fclose($handle);
 
+    $media = $connection->upload('media/upload', ['media' => $tmpfname]);
+    $parameters = [
+        'status' => '#PS4share',
+        'media_ids' => $media->media_id_string
+        ];
+
+    $result = $connection->post('statuses/update', $parameters);
+    echo $result;
+
+    unlink($tmpfname);
 ?>

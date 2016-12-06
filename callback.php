@@ -19,12 +19,15 @@
     //OAuth トークンも用いて TwitterOAuth をインスタンス化
     $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $request_token['oauth_token'], $request_token['oauth_token_secret']);
 
-    //アプリでは、access_token(配列になっています)をうまく使って、Twitter上のアカウントを操作していきます
     $_SESSION['access_token'] = $connection->oauth("oauth/access_token", array("oauth_verifier" => $_REQUEST['oauth_verifier']));
+
+    //ユーザー情報をGET
+    $user = $connection->get("account/verify_credentials");
+    $_SESSION['twitter_user'] = $user;
 
     //セッションIDをリジェネレート
     session_regenerate_id();
 
     //マイページへリダイレクト
-    header( 'location: upload.php' );
+    header( 'location: index.php' );
 ?>

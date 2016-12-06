@@ -23,7 +23,7 @@ export default class CanvasComponent extends Component {
   }
 
   render() {
-    return <canvas ref="canvas" width={this.props.width} height={this.props.height}></canvas>;
+    return <canvas id="meshiCanvas" ref="canvas" width={this.props.width} height={this.props.height}></canvas>;
   }
 }
 

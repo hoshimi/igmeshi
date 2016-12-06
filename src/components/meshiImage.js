@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
+import {Button} from 'react-bootstrap';
 
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
@@ -123,7 +124,6 @@ class MeshiImagePreview extends React.Component {
                     ctx.textAlign = "right";
                     ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
                     ctx.fillText("◯ 次へ", detailSize.x + detailSize.width, detailSize.y + detailSize.height + 20);
-
                 }
             },
         }
