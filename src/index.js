@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Navbar, Nav, NavItem, MenuItem, Button} from 'react-bootstrap';
+import {FormGroup, FormControl, Navbar, Nav, NavItem, MenuItem, Button} from 'react-bootstrap';
 import DetailForm from './components/form.js';
 import MeshiImage from './components/meshiImage.js';
 
@@ -28,6 +28,10 @@ class MainContainer extends React.Component {
 class MeshiHeader extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            "postMessage": "#PS4share",
+        }
     }
 
     uploadImageToTwitter() {
@@ -37,7 +41,7 @@ class MeshiHeader extends React.Component {
             url: "upload.php",
             dataType: 'text',
             type: 'POST',
-            data: {"data": cv.toDataURL()},
+            data: {"data": cv.toDataURL(), "message": this.state.postMessage},
             success: function(data) {
                 console.log("success: ", data);
             },
@@ -45,6 +49,10 @@ class MeshiHeader extends React.Component {
                 console.error("upload.php:", status, err.toString());
             },
         });
+    }
+
+    handleChange(key, e) {
+        this.setState({[key]: e.target.value});
     }
 
     render() {
@@ -65,6 +73,10 @@ class MeshiHeader extends React.Component {
                 </Nav>
 
                 <Navbar.Form pullLeft>
+                <FormGroup>
+                    <FormControl style={{width: "300px", marginRight: "10px"}} type="text" value={this.state.postMessage} onChange={(event) => this.handleChange("postMessage", event)} />
+                </FormGroup>
+
                 <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">Twitter投稿</Button>
                 </Navbar.Form>
             </Navbar>
