@@ -1,0 +1,14 @@
+body {
+    font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','Meiryo UI','メイリオ','Meiryo',Verdana,'ＭＳ Ｐゴシック',sans-serif;
+    font-size: 9pt;
+}
+
+div.mainContainer {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.form-control {
+    margin-top: 2px;
+}

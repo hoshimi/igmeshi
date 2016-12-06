@@ -18,13 +18,9 @@ class MainContainer extends React.Component {
 
     render() {
         return <div className="mainContainer">
-               <Grid>
-               <Row>
                     <h3>イグニスメシ</h3>
-                    <Col xs={12}><MeshiImage meshiState={this.state.meshiState} /></Col>
-                    <Col xs={12}><DetailForm onChangeMeshiState={(s) => this.onChangeMeshiState(s)} /></Col>
-               </Row>
-               </Grid>
+                    <MeshiImage meshiState={this.state.meshiState} />
+                    <DetailForm onChangeMeshiState={(s) => this.onChangeMeshiState(s)} />
                </div>
     }
 }
