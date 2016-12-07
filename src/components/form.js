@@ -35,11 +35,18 @@ class DetailForm extends React.Component {
     generateRandomEffect(event) {
         let meshiInd, meshiLVInd;
         let newState = this.state;
+        let usedKeys = [];
         for(let i = 1; i <= 3; i++){
             let temp_key = "Effect" + i;
             meshiInd = Math.floor(effects_raw.length * Math.random());
+            while(usedKeys.indexOf(meshiInd) >= 0) {
+                meshiInd = Math.floor(effects_raw.length * Math.random());
+            }
+
             let eff = effects_descriptions[effects_raw[meshiInd]];
             newState[temp_key] = effects_raw[meshiInd];
+
+            usedKeys.unshift(meshiInd);
 
             if(!eff["ja"]["nolv"]) {
                 temp_key = "Effect" + i + "Lv";
@@ -76,7 +83,6 @@ class DetailForm extends React.Component {
             desc = desc.replace(/@@/g, (descAmount * lv).toString());
             newState["Effect3Desc"] = desc;
         }
-        console.log(newState);
     }
 
     handleChange(key, e) {
