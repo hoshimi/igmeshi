@@ -41,7 +41,7 @@ let effects_descriptions = {
     },
     "STATUS_GUARD": {
         "ja": {"title": "状態異常耐性", "desc": "状態異常をほぼ完全に防ぐ", "amount": 0, "nolv": true},
-        "en": {"title": "状態異常耐性", "desc": "Prevents status", "amount": 0, "nolv": true},
+        "en": {"title": "Proof", "desc": "Prevents status", "amount": 0, "nolv": true},
     },
     "FIRE_GUARD": {
         "ja": {"title": "炎耐性アップ", "desc": "炎耐性が +@@される", "amount": 10, "nolv": false},
