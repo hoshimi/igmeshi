@@ -21,4 +21,5 @@ export let language = (window.navigator.languages && window.navigator.languages[
 window.navigator.language ||
 window.navigator.userLanguage ||
 window.navigator.browserLanguage;
-if(language != "ja") language = "en";
+language = "ja";
+// if(language != "ja") language = "en";
