@@ -2,6 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
 import {Button} from 'react-bootstrap';
+import UA from './utils.js';
 
 class MeshiImage extends React.Component {
 
@@ -31,12 +32,18 @@ class MeshiImage extends React.Component {
                         onDrop={(e) => this.onDrop(e)}
                         accept="image/gif,image/jpeg,image/png,image/jpg"
                         multiple={false}
-                        style={{width: "100%", height: "540px", borderWidth: 2, borderColor: '#666', borderStyle: 'dashed', borderRadius: 5}}
+                        style={{width: "100%", height: "300px", borderWidth: 2, borderColor: '#666', borderStyle: 'dashed', borderRadius: 5}}
                     >
-                    <p className="text-primary">
-                    めしがぞうをドラッグアンドドロップ<br/>
-                    対応形式: gif, jpeg, jpg, png
-                    </p>
+                    {(UA.Mobile || UA.Tablet) ?
+                        <p className="text-primary">
+                        タップしてください
+                        </p>
+                        :
+                        <p className="text-primary">
+                        めしがぞうをドラッグアンドドロップ<br/>
+                        対応形式: gif, jpeg, jpg, png
+                        </p>
+                    }
                     </Dropzone>
                 :
                     <div>

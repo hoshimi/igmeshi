@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
+import UA from './utils.js';
 
 const effects_raw = ["攻撃力アップ", "防御力アップ", "HPアップ"];
 const effects_descriptions = {
@@ -93,7 +94,11 @@ class DetailForm extends React.Component {
     render() {
         return (
             <FormGroup controlId="meshiForm">
-            <Button onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">めし効果生成(ランダム)</Button>
+            {(UA.Mobile || UA.Tablet) ?
+                <Button block onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">めし効果生成(ランダム)</Button>
+                :
+                <Button onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">めし効果生成(ランダム)</Button>
+            }
 
             <hr/>
             <ControlLabel>料理名</ControlLabel>
