@@ -31,24 +31,37 @@ class MeshiHeader extends React.Component {
         super(props);
 
         this.state = {
-            "postMessage": "#PS4share",
+            postMessage: "#PS4share / http://hsimyu.net/igmeshi",
+            postingMessage: false,
         }
     }
 
     uploadImageToTwitter() {
+        this.setState({postingMessage: true})
         let cv = document.getElementById("meshiCanvas");
+
+        let png_data = cv.toDataURL('image/png');
+        let jpg_data = cv.toDataURL('image/jpeg');
+
+        let dataURL = (png_data.length > jpg_data.length ? jpg_data : png_data);
 
         $.ajax({
             url: "upload.php",
             dataType: 'text',
             type: 'POST',
-            data: {"data": cv.toDataURL(), "message": this.state.postMessage},
+            data: {"data": dataURL, "message": this.state.postMessage},
             success: function(data) {
-                console.log("success: ", data);
-            },
+                console.log(data);
+                let received = data.split(":");
+
+                if(received.length > 1 && received[0] != "200"){
+                    alert("Error: " + received[1]);
+                }
+                this.setState({postingMessage: false})
+            }.bind(this),
             error: function(xhr, status, err) {
                 console.error("upload.php:", status, err.toString());
-            },
+            }.bind(this),
         });
     }
 
@@ -79,7 +92,17 @@ class MeshiHeader extends React.Component {
                             <FormControl style={{width: "100%"}} type="text" value={this.state.postMessage} onChange={(event) => this.handleChange("postMessage", event)} />
                         </FormGroup>
 
-                        <Button block bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">Twitter投稿</Button>
+                        {this.state.postingMessage ?
+                            <Button block disabled bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
+                                <i className="fa fa-refresh fa-spin"></i>
+                                &nbsp;Twitter投稿
+                            </Button>
+                            :
+                            <Button block bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
+                                <i className="fa fa-refresh"></i>
+                                &nbsp;Twitter投稿
+                            </Button>
+                        }
                         </Navbar.Form>
                         :
                         null
@@ -109,7 +132,18 @@ class MeshiHeader extends React.Component {
                             <FormControl style={{width: "300px", marginRight: "10px"}} type="text" value={this.state.postMessage} onChange={(event) => this.handleChange("postMessage", event)} />
                         </FormGroup>
 
-                        <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">Twitter投稿</Button>
+                        {this.state.postingMessage ?
+                            <Button disabled bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
+                                <i className="fa fa-refresh fa-spin"></i>
+                                &nbsp;Twitter投稿
+                            </Button>
+                            :
+                            <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
+                                <i className="fa fa-refresh"></i>
+                                &nbsp;Twitter投稿
+                            </Button>
+                        }
+
                         </Navbar.Form>
                         :
                         null
