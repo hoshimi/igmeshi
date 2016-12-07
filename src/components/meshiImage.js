@@ -89,8 +89,9 @@ class MeshiImagePreview extends React.Component {
 
     render() {
         // CANVASサイズは固定で、アスペクト比だけ保存
+        const aspect = (this.state.image.height/this.state.image.width);
         const CANVAS_WIDTH = 1920;
-        const CANVAS_HEIGHT = 1920 * (this.state.image.height/this.state.image.width);
+        const CANVAS_HEIGHT = 1920 * aspect;
 
         const {meshiState} = this.props;
 
@@ -101,13 +102,25 @@ class MeshiImagePreview extends React.Component {
         //     height: (1.5 * CANVAS_HEIGHT/5),
         // };
 
-        // 効果枠は固定にする
-        let detailSize = {
-            x: 1229,
-            y: 864,
-            width: 624,
-            height: 432,
-        };
+        // 効果枠はワイドかノーマルかで大きく分けて、あとは固定にする
+        let detailSize;
+        if(aspect > 10/16) {
+            // ノーマルの時
+            detailSize = {
+                x: 1229,
+                y: 3.0 * CANVAS_HEIGHT/5,
+                width: 624,
+                height: 432,
+            };
+        } else {
+            // ワイドの時
+            detailSize = {
+                x: 1229,
+                y: 2.7 * CANVAS_HEIGHT/5,
+                width: 624,
+                height: 432,
+            };
+        }
 
         let drawMeshiEffect = (ctx, baseX, baseY, meshiId) => {
             ctx.textAlign = "left";
