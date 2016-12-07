@@ -79,6 +79,10 @@ class MeshiHeader extends React.Component {
 
                 <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">Twitter投稿</Button>
                 </Navbar.Form>
+
+                <Nav>
+                    <NavItem href="https://twitter.com/hsimyu">Created By @hsimyu</NavItem>
+                </Nav>
             </Navbar>
         );
     }
