@@ -36,9 +36,9 @@ class MeshiImage extends React.Component {
                         style={{width: "100%", height: "300px", borderWidth: 2, borderColor: '#666', borderStyle: 'dashed', borderRadius: 5}}
                     >
                     {(UA.Mobile || UA.Tablet) ?
-                        <h2 className="text-primary text-center">
+                        <h3 className="text-primary text-center">
                         {language == "ja" ? "タップしてください" : "Tap Here"}
-                        </h2>
+                        </h3>
                         :
                         <div>
                         <h2 className="text-primary text-center">
