@@ -25,7 +25,9 @@
         </script>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app">
+            対応ブラウザ: Chrome<br/>Chromeでも動かない場合は、Chromeを最新バージョン(最低でも50以上？)へ更新して下さい。
+        </div>
         <script src="./build/index.js"></script>
     </body>
 </html>
