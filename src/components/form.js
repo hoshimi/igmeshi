@@ -107,7 +107,7 @@ class DetailForm extends React.Component {
             }
 
             <hr/>
-            <ControlLabel>料理名 / Food Name</ControlLabel>
+            <ControlLabel>料理名 / Dish Name</ControlLabel>
             <FormControl type="text" value={this.state.FoodTitle} onChange={this.handleChange.bind(this, "FoodTitle")}/>
 
             <ControlLabel>効果1 / Effect 1</ControlLabel>
