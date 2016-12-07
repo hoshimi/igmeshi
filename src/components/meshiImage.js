@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
-import {Button} from 'react-bootstrap';
+import {Button, ButtonGroup} from 'react-bootstrap';
 import UA from './utils.js';
 import effects_descriptions from './effect_consts.js';
 
@@ -71,28 +71,75 @@ class MeshiImagePreview extends React.Component {
         this.state = {
             image: imageObject,
             isLoaded: false,
+            rotation: 0,
         }
     }
 
     componentWillReceiveProps(props) {
-        if(props != this.props){
+        if(props.previewUrl != this.props.previewUrl){
             let imageObject = new Image();
             imageObject.src = props.previewUrl;
-
             // imageObjectがロードされたらstateが更新されるようにしてしまう
             imageObject.onload = () => {
                 this.setState({isLoaded: true})
+
             };
 
             this.setState({image: imageObject, isLoaded: false});
         }
     }
 
+    imageResize(image_src, mime_type, width, height, rotate) {
+        // New Canvas
+        let canvas = document.createElement('canvas');
+        if(rotate == 90 || rotate == 270) {
+            // swap w <==> h
+            canvas.width = height;
+            canvas.height = width;
+        } else {
+            canvas.width = width;
+            canvas.height = height;
+        }
+        // Draw (Resize)
+        let ctx = canvas.getContext('2d');
+        if(rotate && rotate > 0) {
+            ctx.rotate(rotate * Math.PI / 180);
+            if(rotate == 90)
+                ctx.translate(0, -height);
+            else if(rotate == 180)
+                ctx.translate(-width, -height);
+            else if(rotate == 270)
+                ctx.translate(-width, 0);
+        }
+        ctx.drawImage(image_src, 0, 0, width, height);
+        // Image Base64
+        return canvas.toDataURL(mime_type);
+    }
+
+    onClickRotation(e) {
+        let rotation = this.state.rotation + 90;
+
+        if(rotation > 360) rotation = 0;
+        this.setState({rotation: rotation});
+
+        let imageObject = this.state.image;
+        imageObject.src = this.imageResize(imageObject, "image/jpeg", imageObject.width, imageObject.height, 90.0);
+
+        this.setState({isLoaded: false})
+
+        imageObject.onload = () => {
+            this.setState({isLoaded: true})
+            this.setState({image: imageObject});
+        };
+    }
+
     render() {
+        let imageObject = this.state.image;
+
         // CANVASサイズは固定で、アスペクト比だけ保存
-        const aspect = (this.state.image.height/this.state.image.width);
-        const CANVAS_WIDTH = 1920;
-        const CANVAS_HEIGHT = 1920 * aspect;
+        const aspect = (imageObject.height/imageObject.width);
+        let CANVAS_WIDTH = 1920;
+        let CANVAS_HEIGHT = 1920 * aspect;
 
         const {meshiState} = this.props;
 
@@ -192,6 +239,11 @@ class MeshiImagePreview extends React.Component {
 
         return (
             <div>
+                <ButtonGroup>
+                <Button onClick={(e) => this.onClickRotation(e)} bsStyle="default">
+                <i className="fa fa-repeat" aria-hidden="true"></i>&nbsp;右に回転
+                </Button>
+                </ButtonGroup>
                 <CanvasComponent {...canvasProps} />
             </div>
         );
