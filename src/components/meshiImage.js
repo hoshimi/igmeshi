@@ -88,33 +88,44 @@ class MeshiImagePreview extends React.Component {
     }
 
     render() {
-        const CANVAS_WIDTH = this.state.image.width;
-        const CANVAS_HEIGHT = this.state.image.height;
+        // CANVASサイズは固定で、アスペクト比だけ保存
+        const CANVAS_WIDTH = 1920;
+        const CANVAS_HEIGHT = 1920 * (this.state.image.height/this.state.image.width);
 
         const {meshiState} = this.props;
-        const detailSize = {
-            x: CANVAS_WIDTH - 280,
-            y: CANVAS_HEIGHT - 180,
-            width: 260,
-            height: 145,
+
+        // let detailSize = {
+        //     x: 3.2 * CANVAS_WIDTH/5,
+        //     y: 3.0 * CANVAS_HEIGHT/5,
+        //     width: (1.3 * CANVAS_WIDTH/4),
+        //     height: (1.5 * CANVAS_HEIGHT/5),
+        // };
+
+        // 効果枠は固定にする
+        let detailSize = {
+            x: 1229,
+            y: 864,
+            width: 624,
+            height: 432,
         };
 
-        let drawMeshiEffect = function(ctx, baseX, baseY, meshiId) {
+        let drawMeshiEffect = (ctx, baseX, baseY, meshiId) => {
             ctx.textAlign = "left";
             // box
             ctx.fillStyle = "rgba(40, 76, 92, 0.3)";
-            ctx.fillRect(baseX, baseY, detailSize.width - 20, 30);
+            ctx.fillRect(baseX, baseY, detailSize.width - 30, 100);
             // line
-            ctx.fillStyle = "rgba(40, 76, 92, 0.3)";
-            ctx.fillRect(baseX + 5, baseY + 10, detailSize.width - 25, 1);
+            ctx.fillStyle = "rgba(40, 76, 92, 0.6)";
+            ctx.fillRect(baseX + 15, baseY + 30, detailSize.width - 60, 2);
             // text
-            ctx.font = "8pt 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
+            ctx.font = "22px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(134, 195, 237, 1.0)";
-            ctx.fillText(meshiState["Effect" + meshiId + "Title"] + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 10, baseY + 9);
+            ctx.fillText(meshiState["Effect" + meshiId + "Title"] + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
 
-            ctx.font = "4pt 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
+            ctx.font = "18px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(204, 222, 232, 1.0)";
-            ctx.fillText(meshiState["Effect" + meshiId + "Desc"], baseX + 10, baseY + 24);
+            ctx.fillText(meshiState["Effect" + meshiId + "Desc"], baseX + 15, baseY + 70);
+
         }
 
         const canvasProps = {
@@ -132,29 +143,30 @@ class MeshiImagePreview extends React.Component {
 
                 // タイトル上下の緑線
                 ctx.fillStyle = 'rgba(141, 209, 137, 1.0)';
-                ctx.fillRect(detailSize.x + 10, detailSize.y + 20, detailSize.width - 20, 2);
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 40, detailSize.width - 30, 2);
                 ctx.fillStyle = 'rgba(67, 101, 67, 1.0)';
-                ctx.fillRect(detailSize.x + 10, detailSize.y + 21, detailSize.width - 20, 1);
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 42, detailSize.width - 30, 2);
 
                 ctx.fillStyle = 'rgba(76, 114, 76, 1.0)';
-                ctx.fillRect(detailSize.x + 10, detailSize.y + 35, detailSize.width - 20, 1);
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 80, detailSize.width - 30, 2);
                 ctx.fillStyle = 'rgba(122, 181, 119, 1.0)';
-                ctx.fillRect(detailSize.x + 10, detailSize.y + 36, detailSize.width - 20, 1);
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 82, detailSize.width - 30, 2);
 
                 ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-                ctx.font = "8pt 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
+                ctx.font = "24px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
                 ctx.textAlign = "center";
-                ctx.fillText(meshiState.FoodTitle, detailSize.x + (detailSize.width/2), detailSize.y + 32);
+                ctx.fillText(meshiState.FoodTitle, detailSize.x + (detailSize.width/2), detailSize.y + 72);
 
                 ctx.textAlign = "left";
-                drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 41, "1");
-                drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 74, "2");
-                drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 107, "3");
+                drawMeshiEffect(ctx, detailSize.x + 15, detailSize.y + 92, "1");
+                drawMeshiEffect(ctx, detailSize.x + 15, detailSize.y + 202, "2");
+                drawMeshiEffect(ctx, detailSize.x + 15, detailSize.y + 312, "3");
 
                 // next button
                 ctx.textAlign = "right";
                 ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-                ctx.fillText("◯ 次へ", detailSize.x + detailSize.width, detailSize.y + detailSize.height + 20);
+                ctx.font = "30px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
+                ctx.fillText("◯ 次へ", detailSize.x + detailSize.width, detailSize.y + detailSize.height + 40);
             },
         }
 
