@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
 import {Button} from 'react-bootstrap';
 import UA from './utils.js';
+import effects_descriptions from './effect_consts.js';
 
 class MeshiImage extends React.Component {
 
@@ -123,6 +124,8 @@ class MeshiImagePreview extends React.Component {
         }
 
         let drawMeshiEffect = (ctx, baseX, baseY, meshiId) => {
+            let meshiEff = effects_descriptions[meshiState["Effect" + meshiId]];
+
             ctx.textAlign = "left";
             // box
             ctx.fillStyle = "rgba(40, 76, 92, 0.3)";
@@ -133,7 +136,7 @@ class MeshiImagePreview extends React.Component {
             // text
             ctx.font = "22px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(134, 195, 237, 1.0)";
-            ctx.fillText(meshiState["Effect" + meshiId + "Title"] + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
+            ctx.fillText(meshiEff.ja.title + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
 
             ctx.font = "18px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(204, 222, 232, 1.0)";
