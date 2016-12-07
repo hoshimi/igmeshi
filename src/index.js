@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {FormGroup, FormControl, Navbar, Nav, NavItem, MenuItem, Button} from 'react-bootstrap';
 import DetailForm from './components/form.js';
 import MeshiImage from './components/meshiImage.js';
+import UA from './components/utils.js';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -56,35 +57,70 @@ class MeshiHeader extends React.Component {
     }
 
     render() {
-        return (
-            <Navbar>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="#">イグニスメシ</a>
-                    </Navbar.Brand>
-                </Navbar.Header>
+        if(UA.Mobile || UA.Tablet){
+            return (
+                <Navbar>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href="#">イグニスメシ</a>
+                        </Navbar.Brand>
+                        <Nav>
+                        {isTwitterLoggedIn ?
+                            <NavItem href="./logout.php">Twitterログアウト</NavItem>
+                            :
+                            <NavItem href="./login.php">Twitter認証</NavItem>
+                        }
+                        </Nav>
+                    </Navbar.Header>
 
-                <Nav>
                     {isTwitterLoggedIn ?
-                        <NavItem href="./logout.php">Twitterログアウト</NavItem>
+                        <Navbar.Form pullLeft>
+                        <FormGroup>
+                            <FormControl style={{width: "100%"}} type="text" value={this.state.postMessage} onChange={(event) => this.handleChange("postMessage", event)} />
+                        </FormGroup>
+
+                        <Button block bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">Twitter投稿</Button>
+                        </Navbar.Form>
                         :
-                        <NavItem href="./login.php">Twitter認証</NavItem>
+                        null
                     }
-                </Nav>
+                </Navbar>
+            );
+        } else {
+            return (
+                <Navbar>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href="#">イグニスメシ</a>
+                        </Navbar.Brand>
+                    </Navbar.Header>
 
-                <Navbar.Form pullLeft>
-                <FormGroup>
-                    <FormControl style={{width: "300px", marginRight: "10px"}} type="text" value={this.state.postMessage} onChange={(event) => this.handleChange("postMessage", event)} />
-                </FormGroup>
+                    <Nav>
+                        {isTwitterLoggedIn ?
+                            <NavItem href="./logout.php">Twitterログアウト</NavItem>
+                            :
+                            <NavItem href="./login.php">Twitter認証</NavItem>
+                        }
+                    </Nav>
 
-                <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">Twitter投稿</Button>
-                </Navbar.Form>
+                    {isTwitterLoggedIn ?
+                        <Navbar.Form pullLeft>
+                        <FormGroup>
+                            <FormControl style={{width: "300px", marginRight: "10px"}} type="text" value={this.state.postMessage} onChange={(event) => this.handleChange("postMessage", event)} />
+                        </FormGroup>
 
-                <Nav>
-                    <NavItem href="https://twitter.com/hsimyu">Created By @hsimyu</NavItem>
-                </Nav>
-            </Navbar>
-        );
+                        <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">Twitter投稿</Button>
+                        </Navbar.Form>
+                        :
+                        null
+                    }
+
+                    <Nav>
+                        <NavItem href="https://twitter.com/hsimyu">Created By @hsimyu</NavItem>
+                    </Nav>
+                </Navbar>
+            );
+        }
     }
 }
 

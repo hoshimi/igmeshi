@@ -18,3 +18,7 @@ div.mainContainer {
     display: block;
     margin-left: auto;
 }
+
+#meshiCanvas {
+    width: 100%;
+}
