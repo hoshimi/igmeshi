@@ -136,7 +136,11 @@ class MeshiImagePreview extends React.Component {
             // text
             ctx.font = "22px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(134, 195, 237, 1.0)";
-            ctx.fillText(meshiEff.ja.title + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
+            if(meshiEff.ja.nolv) {
+                ctx.fillText(meshiEff.ja.title, baseX + 15, baseY + 27);
+            } else {
+                ctx.fillText(meshiEff.ja.title + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
+            }
 
             ctx.font = "18px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(204, 222, 232, 1.0)";
