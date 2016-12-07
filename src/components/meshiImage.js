@@ -191,10 +191,10 @@ class MeshiImagePreview extends React.Component {
             ctx.font = "22px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(134, 195, 237, 1.0)";
             if(meshiEff.ja.nolv) {
-                ctx.fillText(meshiEff[language].title, baseX + 15, baseY + 27);
+                ctx.fillText(meshiEff[language].title, baseX + 15, baseY + 27, detailSize.width - 30);
             } else {
                 if(language == "ja") {
-                    ctx.fillText(meshiEff[language].title + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
+                    ctx.fillText(meshiEff[language].title + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27, detailSize.width - 30);
                 } else {
                     ctx.fillText(meshiEff[language].title + " (Level " + meshiState["Effect" + meshiId + "Lv"] + ")", baseX + 15, baseY + 27, detailSize.width - 30);
                 }
