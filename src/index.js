@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {FormGroup, FormControl, Navbar, Nav, NavItem, MenuItem, Button} from 'react-bootstrap';
 import DetailForm from './components/form.js';
 import MeshiImage from './components/meshiImage.js';
-import UA from './components/utils.js';
+import {UA, language} from './components/utils.js';
 
 class MainContainer extends React.Component {
     constructor(props) {
@@ -75,13 +75,13 @@ class MeshiHeader extends React.Component {
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="#">イグニスメシ</a>
+                            {language == "ja" ? <a href="#">イグニスメシ</a> : <a href="#">IGNIS MESHI</a>}
                         </Navbar.Brand>
                         <Nav>
                         {isTwitterLoggedIn ?
-                            <NavItem href="./logout.php">Twitterログアウト</NavItem>
+                            <NavItem href="./logout.php">Twitter Log out</NavItem>
                             :
-                            <NavItem href="./login.php">Twitter認証</NavItem>
+                            <NavItem href="./login.php">Twitter Log in</NavItem>
                         }
                         </Nav>
                     </Navbar.Header>
@@ -95,12 +95,12 @@ class MeshiHeader extends React.Component {
                         {this.state.postingMessage ?
                             <Button block disabled bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh fa-spin"></i>
-                                &nbsp;Twitter投稿
+                                &nbsp;Twitter投稿 / Post
                             </Button>
                             :
                             <Button block bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh"></i>
-                                &nbsp;Twitter投稿
+                                &nbsp;Twitter投稿 / Post
                             </Button>
                         }
                         </Navbar.Form>
@@ -114,15 +114,15 @@ class MeshiHeader extends React.Component {
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="#">イグニスメシ</a>
+                            {language == "ja" ? <a href="#">イグニスメシ</a> : <a href="#">IGNIS MESHI</a>}
                         </Navbar.Brand>
                     </Navbar.Header>
 
                     <Nav>
                         {isTwitterLoggedIn ?
-                            <NavItem href="./logout.php">Twitterログアウト</NavItem>
+                            <NavItem href="./logout.php">Twitter Log out</NavItem>
                             :
-                            <NavItem href="./login.php">Twitter認証</NavItem>
+                            <NavItem href="./login.php">Twitter Log in</NavItem>
                         }
                     </Nav>
 
@@ -135,12 +135,12 @@ class MeshiHeader extends React.Component {
                         {this.state.postingMessage ?
                             <Button disabled bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh fa-spin"></i>
-                                &nbsp;Twitter投稿
+                                &nbsp;Twitter投稿 / Post
                             </Button>
                             :
                             <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh"></i>
-                                &nbsp;Twitter投稿
+                                &nbsp;Twitter投稿 / Post
                             </Button>
                         }
 

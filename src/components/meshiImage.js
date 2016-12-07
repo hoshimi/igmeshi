@@ -2,7 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
 import {Button, ButtonGroup} from 'react-bootstrap';
-import UA from './utils.js';
+import {UA, language} from './utils.js';
 import effects_descriptions from './effect_consts.js';
 
 class MeshiImage extends React.Component {
@@ -36,14 +36,21 @@ class MeshiImage extends React.Component {
                         style={{width: "100%", height: "300px", borderWidth: 2, borderColor: '#666', borderStyle: 'dashed', borderRadius: 5}}
                     >
                     {(UA.Mobile || UA.Tablet) ?
-                        <p className="text-primary">
-                        タップしてください
-                        </p>
+                        <h2 className="text-primary text-center">
+                        {language == "ja" ? "タップしてください" : "Tap Here"}
+                        </h2>
                         :
-                        <p className="text-primary">
+                        <div>
+                        <h2 className="text-primary text-center">
                         めしがぞうをドラッグアンドドロップ<br/>
                         対応形式: gif, jpeg, jpg, png
-                        </p>
+                        </h2>
+
+                        <h2 className="text-primary text-center">
+                        Drag and Drop food image here<br/>
+                        Formats: gif, jpeg, jpg, png
+                        </h2>
+                        </div>
                     }
                     </Dropzone>
                 :
@@ -184,9 +191,9 @@ class MeshiImagePreview extends React.Component {
             ctx.font = "22px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
             ctx.fillStyle = "rgba(134, 195, 237, 1.0)";
             if(meshiEff.ja.nolv) {
-                ctx.fillText(meshiEff.ja.title, baseX + 15, baseY + 27);
+                ctx.fillText(meshiEff[language].title, baseX + 15, baseY + 27);
             } else {
-                ctx.fillText(meshiEff.ja.title + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
+                ctx.fillText(meshiEff[language].title + "Lvl." + meshiState["Effect" + meshiId + "Lv"], baseX + 15, baseY + 27);
             }
 
             ctx.font = "18px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
@@ -241,7 +248,7 @@ class MeshiImagePreview extends React.Component {
             <div>
                 <ButtonGroup>
                 <Button onClick={(e) => this.onClickRotation(e)} bsStyle="default">
-                <i className="fa fa-repeat" aria-hidden="true"></i>&nbsp;右に回転
+                <i className="fa fa-repeat" aria-hidden="true"></i>&nbsp;右に回転 / Rotate
                 </Button>
                 </ButtonGroup>
                 <CanvasComponent {...canvasProps} />

@@ -1,4 +1,4 @@
-let UA = (function(u){
+export let UA = (function(u){
   return {
     Tablet:(u.indexOf("windows") != -1 && u.indexOf("touch") != -1 && u.indexOf("tablet pc") == -1)
       || u.indexOf("ipad") != -1
@@ -16,4 +16,9 @@ let UA = (function(u){
   }
 })(window.navigator.userAgent.toLowerCase());
 
-export default UA;
+// 言語設定
+export let language = (window.navigator.languages && window.navigator.languages[0]) ||
+window.navigator.language ||
+window.navigator.userLanguage ||
+window.navigator.browserLanguage;
+if(language != "ja") language = "en";

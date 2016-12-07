@@ -21,6 +21,7 @@
                 } else {
                     echo "var isTwitterLoggedIn = false;";
                 }
+
             ?>
         </script>
     </head>
