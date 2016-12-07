@@ -3,9 +3,6 @@ import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
 import {Button} from 'react-bootstrap';
 
-const CANVAS_WIDTH = 960;
-const CANVAS_HEIGHT = 540;
-
 class MeshiImage extends React.Component {
 
     constructor(props) {
@@ -34,7 +31,7 @@ class MeshiImage extends React.Component {
                         onDrop={(e) => this.onDrop(e)}
                         accept="image/gif,image/jpeg,image/png,image/jpg"
                         multiple={false}
-                        style={{width: "100%", height: CANVAS_HEIGHT, borderWidth: 2, borderColor: '#666', borderStyle: 'dashed', borderRadius: 5}}
+                        style={{width: "100%", height: "540px", borderWidth: 2, borderColor: '#666', borderStyle: 'dashed', borderRadius: 5}}
                     >
                     <p className="text-primary">
                     めしがぞうをドラッグアンドドロップ<br/>
@@ -55,10 +52,39 @@ class MeshiImage extends React.Component {
 class MeshiImagePreview extends React.Component {
     constructor(props) {
         super(props);
+        let imageObject = new Image();
+        imageObject.src = this.props.previewUrl;
+
+        // imageObjectがロードされたらstateが更新されるようにしてしまう
+        imageObject.onload = () => {
+            this.setState({isLoaded: true})
+        };
+
+        this.state = {
+            image: imageObject,
+            isLoaded: false,
+        }
+    }
+
+    componentWillReceiveProps(props) {
+        if(props != this.props){
+            let imageObject = new Image();
+            imageObject.src = props.previewUrl;
+
+            // imageObjectがロードされたらstateが更新されるようにしてしまう
+            imageObject.onload = () => {
+                this.setState({isLoaded: true})
+            };
+
+            this.setState({image: imageObject, isLoaded: false});
+        }
     }
 
     render() {
-        const {previewUrl, meshiState} = this.props;
+        const CANVAS_WIDTH = this.state.image.width;
+        const CANVAS_HEIGHT = this.state.image.height;
+
+        const {meshiState} = this.props;
         const detailSize = {
             x: CANVAS_WIDTH - 280,
             y: CANVAS_HEIGHT - 180,
@@ -88,43 +114,40 @@ class MeshiImagePreview extends React.Component {
             width: CANVAS_WIDTH,
             height: CANVAS_HEIGHT,
             updateCanvas: (ctx) => {
-                const imageObject = new Image();
-                imageObject.src = previewUrl;
-                imageObject.onload = () => {
-                    ctx.drawImage(imageObject, 0, 0, imageObject.width, imageObject.height, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                let imageObject = this.state.image;
+                ctx.drawImage(imageObject, 0, 0, imageObject.width, imageObject.height, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-                    // 枠
-                    ctx.strokeStyle = 'rgba(256, 256, 256, 0.2)';
-                    ctx.strokeRect(detailSize.x, detailSize.y, detailSize.width, detailSize.height);
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-                    ctx.fillRect(detailSize.x, detailSize.y, detailSize.width, detailSize.height);
+                // 枠
+                ctx.strokeStyle = 'rgba(256, 256, 256, 0.2)';
+                ctx.strokeRect(detailSize.x, detailSize.y, detailSize.width, detailSize.height);
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                ctx.fillRect(detailSize.x, detailSize.y, detailSize.width, detailSize.height);
 
-                    // タイトル上下の緑線
-                    ctx.fillStyle = 'rgba(141, 209, 137, 1.0)';
-                    ctx.fillRect(detailSize.x + 10, detailSize.y + 20, detailSize.width - 20, 2);
-                    ctx.fillStyle = 'rgba(67, 101, 67, 1.0)';
-                    ctx.fillRect(detailSize.x + 10, detailSize.y + 21, detailSize.width - 20, 1);
+                // タイトル上下の緑線
+                ctx.fillStyle = 'rgba(141, 209, 137, 1.0)';
+                ctx.fillRect(detailSize.x + 10, detailSize.y + 20, detailSize.width - 20, 2);
+                ctx.fillStyle = 'rgba(67, 101, 67, 1.0)';
+                ctx.fillRect(detailSize.x + 10, detailSize.y + 21, detailSize.width - 20, 1);
 
-                    ctx.fillStyle = 'rgba(76, 114, 76, 1.0)';
-                    ctx.fillRect(detailSize.x + 10, detailSize.y + 35, detailSize.width - 20, 1);
-                    ctx.fillStyle = 'rgba(122, 181, 119, 1.0)';
-                    ctx.fillRect(detailSize.x + 10, detailSize.y + 36, detailSize.width - 20, 1);
+                ctx.fillStyle = 'rgba(76, 114, 76, 1.0)';
+                ctx.fillRect(detailSize.x + 10, detailSize.y + 35, detailSize.width - 20, 1);
+                ctx.fillStyle = 'rgba(122, 181, 119, 1.0)';
+                ctx.fillRect(detailSize.x + 10, detailSize.y + 36, detailSize.width - 20, 1);
 
-                    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-                    ctx.font = "8pt 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
-                    ctx.textAlign = "center";
-                    ctx.fillText(meshiState.FoodTitle, detailSize.x + (detailSize.width/2), detailSize.y + 32);
+                ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+                ctx.font = "8pt 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
+                ctx.textAlign = "center";
+                ctx.fillText(meshiState.FoodTitle, detailSize.x + (detailSize.width/2), detailSize.y + 32);
 
-                    ctx.textAlign = "left";
-                    drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 41, "1");
-                    drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 74, "2");
-                    drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 107, "3");
+                ctx.textAlign = "left";
+                drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 41, "1");
+                drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 74, "2");
+                drawMeshiEffect(ctx, detailSize.x + 10, detailSize.y + 107, "3");
 
-                    // next button
-                    ctx.textAlign = "right";
-                    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-                    ctx.fillText("◯ 次へ", detailSize.x + detailSize.width, detailSize.y + detailSize.height + 20);
-                }
+                // next button
+                ctx.textAlign = "right";
+                ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+                ctx.fillText("◯ 次へ", detailSize.x + detailSize.width, detailSize.y + detailSize.height + 20);
             },
         }
 
