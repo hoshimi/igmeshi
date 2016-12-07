@@ -8,6 +8,11 @@ div.mainContainer {
     margin-left: 10%;
     margin-right: 10%;
 }
+div.footerAdv {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
 
 .form-control {
     margin-top: 2px;

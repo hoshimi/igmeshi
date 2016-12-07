@@ -29,5 +29,10 @@
             対応ブラウザ: Chrome<br/>Chromeでも動かない場合は、Chromeを最新バージョン(最低でも50以上？)へ更新して下さい。
         </div>
         <script src="./build/index.js"></script>
+        <div class="footerAdv">
+            <iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=chubounosuk00-22&o=9&p=8&l=as1&m=amazon&f=ifr&ref=qf_sp_asin_til&asins=B01DN9WFB6" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+            <iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS1=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=chubounosuk00-22&o=9&p=8&l=as1&m=amazon&f=ifr&ref=qf_sp_asin_til&asins=B01AS5EGXS" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+        </div>
     </body>
 </html>
