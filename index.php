@@ -40,15 +40,6 @@
             <iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=chubounosuk00-22&o=9&p=8&l=as1&m=amazon&f=ifr&ref=qf_sp_asin_til&asins=B01DN9WFB6" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
 
             <iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS1=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=chubounosuk00-22&o=9&p=8&l=as1&m=amazon&f=ifr&ref=qf_sp_asin_til&asins=B01AS5EGXS" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-            <script type="text/javascript">
-            <!--
-                amazon_ad_tag = "chubounosuk00-22";
-                amazon_ad_width = "120";
-                amazon_ad_height = "240";
-                amazon_ad_link_target = "new";//-->
-            </script>
-            <script type="text/javascript" src="http://ir-jp.amazon-adsystem.com/s/ads.js"></script>
         </div>
     </body>
 </html>
