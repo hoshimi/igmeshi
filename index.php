@@ -3,7 +3,7 @@
 
 <html>
     <head>
-        <title>igmeshi</title>
+        <title>イグニスメシ / IGNIS MESHI</title>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
