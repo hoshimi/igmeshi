@@ -95,12 +95,14 @@ class MeshiHeader extends React.Component {
                         {this.state.postingMessage ?
                             <Button block disabled bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh fa-spin"></i>
-                                &nbsp;Twitter投稿 / Post
+                                &nbsp;
+                                {language == "ja" ? "Twitter投稿" : "Post to Twitter"}
                             </Button>
                             :
                             <Button block bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh"></i>
-                                &nbsp;Twitter投稿 / Post
+                                &nbsp;
+                                {language == "ja" ? "Twitter投稿" : "Post to Twitter"}
                             </Button>
                         }
                         </Navbar.Form>
@@ -135,12 +137,14 @@ class MeshiHeader extends React.Component {
                         {this.state.postingMessage ?
                             <Button disabled bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh fa-spin"></i>
-                                &nbsp;Twitter投稿 / Post
+                                &nbsp;
+                                {language == "ja" ? "Twitter投稿" : "Post to Twitter"}
                             </Button>
                             :
                             <Button bsStyle="primary" onClick={(event) => this.uploadImageToTwitter(event)} type="submit">
                                 <i className="fa fa-refresh"></i>
-                                &nbsp;Twitter投稿 / Post
+                                &nbsp;
+                                {language == "ja" ? "Twitter投稿" : "Post to Twitter"}
                             </Button>
                         }
 
