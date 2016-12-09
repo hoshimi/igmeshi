@@ -283,18 +283,18 @@ class MeshiImagePreview extends React.Component {
 
         return (
             <div>
-                <ButtonGroup>
+                <CanvasComponent {...canvasProps} />
+                <ButtonGroup style={{width: "100%", marginBottom:"15px"}}>
                     <Button onClick={(e) => this.onClickRotation(e)} bsStyle="default">
                     <i className="fa fa-repeat" aria-hidden="true"></i>&nbsp;
-                    {language == "ja" ? "右に回転" : "Rotate"}
+                    <span className="text-center">{language == "ja" ? "右に回転" : "Rotate"}</span>
                     </Button>
 
                     <Button bsStyle="default" onClick={(event) => this.downloadImage(event)}>
                     <i className="fa fa-download"></i>&nbsp;
-                    {language == "ja" ? "保存" : "Download"}
+                    <span className="text-center">{language == "ja" ? "保存用画像を生成" : "Download"}</span>
                     </Button>
                 </ButtonGroup>
-                <CanvasComponent {...canvasProps} />
             </div>
         );
     }
