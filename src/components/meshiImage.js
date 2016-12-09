@@ -245,23 +245,23 @@ class MeshiImagePreview extends React.Component {
                 ctx.drawImage(imageObject, 0, 0, imageObject.width, imageObject.height, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
                 // 枠
-                ctx.strokeStyle = 'rgba(256, 256, 256, 0.2)';
+                ctx.strokeStyle = 'rgba(174, 156, 132, 0.5)';
                 ctx.strokeRect(detailSize.x, detailSize.y, detailSize.width, detailSize.height);
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
                 ctx.fillRect(detailSize.x, detailSize.y, detailSize.width, detailSize.height);
 
-                // タイトル上下の緑線
-                ctx.fillStyle = 'rgba(141, 209, 137, 1.0)';
+                // タイトル上下の線
+                ctx.fillStyle = 'rgba(237, 215, 168, 1.0)';
                 ctx.fillRect(detailSize.x + 15, detailSize.y + 40, detailSize.width - 30, 2);
-                ctx.fillStyle = 'rgba(67, 101, 67, 1.0)';
-                ctx.fillRect(detailSize.x + 15, detailSize.y + 42, detailSize.width - 30, 2);
+                ctx.fillStyle = 'rgba(196, 175, 128, 1.0)';
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 43, detailSize.width - 30, 1);
 
-                ctx.fillStyle = 'rgba(76, 114, 76, 1.0)';
+                ctx.fillStyle = 'rgba(237, 215, 168, 1.0)';
                 ctx.fillRect(detailSize.x + 15, detailSize.y + 80, detailSize.width - 30, 2);
-                ctx.fillStyle = 'rgba(122, 181, 119, 1.0)';
-                ctx.fillRect(detailSize.x + 15, detailSize.y + 82, detailSize.width - 30, 2);
+                ctx.fillStyle = 'rgba(196, 175, 128, 1.0)';
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 83, detailSize.width - 30, 1);
 
-                ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+                ctx.fillStyle = "rgba(255, 250, 252, 0.8)";
                 ctx.font = "24px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
                 ctx.textAlign = "center";
                 ctx.fillText(meshiState.FoodTitle, detailSize.x + (detailSize.width/2), detailSize.y + 72);
