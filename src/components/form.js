@@ -12,8 +12,9 @@ const effectsLVs = effectsLVs_raw.map( (eff, ind) => <option key={ind} value={ef
 class DetailForm extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            FoodTitle: "",
+            FoodTitle: (language == "ja" ? "イグニスメシ" : "IGNIS MESHI"),
             Effect1: "none",
             Effect1Lv: 1,
             Effect1Desc: "",
