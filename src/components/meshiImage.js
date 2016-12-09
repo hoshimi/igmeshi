@@ -269,10 +269,10 @@ class MeshiImagePreview extends React.Component {
                 // ctx.fill();
 
                 // タイトル下の線
-                ctx.fillStyle = 'rgba(237, 215, 168, 1.0)';
-                ctx.fillRect(detailSize.x + 15, detailSize.y + 80, detailSize.width - 30, 2);
                 ctx.fillStyle = 'rgba(196, 175, 128, 1.0)';
-                ctx.fillRect(detailSize.x + 15, detailSize.y + 83, detailSize.width - 30, 1);
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 80, detailSize.width - 30, 1);
+                ctx.fillStyle = 'rgba(237, 215, 168, 1.0)';
+                ctx.fillRect(detailSize.x + 15, detailSize.y + 82, detailSize.width - 30, 2);
 
                 ctx.fillStyle = "rgba(255, 250, 252, 0.8)";
                 ctx.font = "24px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
