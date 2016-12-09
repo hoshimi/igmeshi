@@ -152,7 +152,7 @@ class MeshiImagePreview extends React.Component {
         let a = document.createElement('a');
         let e = document.createEvent('MouseEvent');
 
-        a.download = "meshiimage" + this.getDate() + dataEXT;
+        a.download = "igmeshi" + this.getDate() + dataEXT;
         a.href = dataURL;
 
         e.initEvent("click", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -168,9 +168,7 @@ class MeshiImagePreview extends React.Component {
         if(dd < 0) dd = '0' + dd
         if(mm < 0) mm = '0' + mm
 
-        today = yyyy + mm + dd
-
-        return today;
+        return yyyy.toString() + mm.toString() + dd.toString()
     }
 
     render() {
