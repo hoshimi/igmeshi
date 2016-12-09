@@ -31,7 +31,7 @@ class MeshiHeader extends React.Component {
         super(props);
 
         this.state = {
-            postMessage: "#PS4share / http://hsimyu.net/igmeshi",
+            postMessage: "#igmeshi / http://hsimyu.net/igmeshi",
             postingMessage: false,
         }
     }

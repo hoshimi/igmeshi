@@ -140,6 +140,39 @@ class MeshiImagePreview extends React.Component {
         };
     }
 
+    downloadImage(event) {
+        let cv = document.getElementById("meshiCanvas");
+
+        let png_data = cv.toDataURL('image/png');
+        let jpg_data = cv.toDataURL('image/jpeg');
+
+        let dataURL = (png_data.length > jpg_data.length ? jpg_data : png_data);
+        let dataEXT = (png_data.length > jpg_data.length ? ".jpg" : ".png")
+
+        let a = document.createElement('a');
+        let e = document.createEvent('MouseEvent');
+
+        a.download = "meshiimage" + this.getDate() + dataEXT;
+        a.href = dataURL;
+
+        e.initEvent("click", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+        a.dispatchEvent(e);
+    }
+
+    getDate() {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth();
+        let yyyy = today.getFullYear();
+
+        if(dd < 0) dd = '0' + dd
+        if(mm < 0) mm = '0' + mm
+
+        today = yyyy + mm + dd
+
+        return today;
+    }
+
     render() {
         let imageObject = this.state.image;
 
@@ -251,9 +284,15 @@ class MeshiImagePreview extends React.Component {
         return (
             <div>
                 <ButtonGroup>
-                <Button onClick={(e) => this.onClickRotation(e)} bsStyle="default">
-                <i className="fa fa-repeat" aria-hidden="true"></i>&nbsp;右に回転 / Rotate
-                </Button>
+                    <Button onClick={(e) => this.onClickRotation(e)} bsStyle="default">
+                    <i className="fa fa-repeat" aria-hidden="true"></i>&nbsp;
+                    {language == "ja" ? "右に回転" : "Rotate"}
+                    </Button>
+
+                    <Button bsStyle="default" onClick={(event) => this.downloadImage(event)}>
+                    <i className="fa fa-download"></i>&nbsp;
+                    {language == "ja" ? "保存" : "Download"}
+                    </Button>
                 </ButtonGroup>
                 <CanvasComponent {...canvasProps} />
             </div>
