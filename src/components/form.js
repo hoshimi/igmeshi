@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
-import {UA} from './utils.js';
+import {UA, multiLocaleString} from './utils.js';
 import effects_descriptions from './effect_consts.js';
 
 const effects_raw = ["ATKUP", "DEFUP", "HPUP", "INTUP", "MNDUP", "HPCUREUP", "POISSON_GUARD", "TODO_GUARD", "DEATH_GUARD", "STATUS_GUARD", "FIRE_GUARD", "ICE_GUARD", "THUNDER_GUARD", "ELEMENT_GUARD", "GOODNESS", "LVBONUS", "EXPBONUS", "LUCKUP", "INF_STAMINA"];
@@ -11,7 +11,8 @@ class DetailForm extends React.Component {
         super(props);
 
         this.state = {
-            FoodTitle: (props.language == "ja" ? "イグニスメシ" : "IGNIS MESHI"),
+            FoodTitle: multiLocaleString(props.language, "イグニスメシ", "IGNIS MESHI"),
+            MeshiPlace: "",
             Effect1: "none",
             Effect1Lv: 1,
             Effect1Desc: "",
@@ -34,7 +35,7 @@ class DetailForm extends React.Component {
         if(nextProps.language != this.props.language){
             // 言語が切り替わったら効果内容を変える
             let newState = this.state;
-            newState["FoodTitle"] = (nextProps.language == "ja" ? "イグニスメシ" : "IGNIS MESHI");
+            newState["FoodTitle"] = multiLocaleString(nextProps.language, "イグニスメシ", "IGNIS MESHI");
             this.updateEffectDesc(newState, nextProps.language);
             this.setState(newState);
             this.props.onChangeMeshiState(newState);
@@ -115,16 +116,29 @@ class DetailForm extends React.Component {
         return (
             <FormGroup controlId="meshiForm">
             {(UA.Mobile || UA.Tablet) ?
-                <Button block onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">{language == "ja" ? "めし効果生成" : "Random Effects"}</Button>
+                <Button block onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">
+                    {multiLocaleString(language, "めし効果生成", "Random Effects")}
+                </Button>
                 :
-                <Button onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">{language == "ja" ? "めし効果生成" : "Random Effects"}</Button>
+                <Button onClick={(event) => this.generateRandomEffect(event)} bsSize="large" bsStyle="primary">
+                    {multiLocaleString(language, "めし効果生成", "Random Effects")}
+                </Button>
             }
 
             <hr/>
-            <ControlLabel>料理名 / Dish Name</ControlLabel>
+            <ControlLabel>
+                {multiLocaleString(language, "料理名", "Dish Name")}
+            </ControlLabel>
             <FormControl type="text" value={this.state.FoodTitle} onChange={this.handleChange.bind(this, "FoodTitle")}/>
 
-            <ControlLabel>効果1 / Effect 1</ControlLabel>
+            <ControlLabel>
+                {multiLocaleString(language, "めしプレイス", "Place")}
+            </ControlLabel>
+            <FormControl type="text" value={this.state.MeshiPlace} onChange={this.handleChange.bind(this, "MeshiPlace")}/>
+
+            <ControlLabel>
+                {multiLocaleString(language, "効果1", "Effect1")}
+            </ControlLabel>
             <FormControl componentClass="select" value={this.state.Effect1} onChange={(event) => this.handleChange("Effect1", event)}>
             {effects}
             </FormControl>
@@ -132,7 +146,9 @@ class DetailForm extends React.Component {
             {effectsLVs}
             </FormControl>
 
-            <ControlLabel>効果2 / Effect 2</ControlLabel>
+            <ControlLabel>
+                {multiLocaleString(language, "効果2", "Effect2")}
+            </ControlLabel>
             <FormControl componentClass="select" value={this.state.Effect2} onChange={(event) => this.handleChange("Effect2", event)}>
             {effects}
             </FormControl>
@@ -140,7 +156,9 @@ class DetailForm extends React.Component {
             {effectsLVs}
             </FormControl>
 
-            <ControlLabel>効果3 / Effect 3</ControlLabel>
+            <ControlLabel>
+                {multiLocaleString(language, "効果3", "Effect3")}
+            </ControlLabel>
             <FormControl componentClass="select" value={this.state.Effect3} onChange={(event) => this.handleChange("Effect3", event)}>
             {effects}
             </FormControl>

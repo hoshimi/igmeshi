@@ -31,3 +31,8 @@ export let getLanguage = () => {
 
     return lang;
 }
+
+export let multiLocaleString = (locale, ja_str, en_str) => {
+    if(locale == "ja") return ja_str;
+    if(locale == "en") return en_str;
+}
