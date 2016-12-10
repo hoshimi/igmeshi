@@ -2,7 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
 import {Button, ButtonGroup} from 'react-bootstrap';
-import {UA} from './utils.js';
+import {UA, multiLocaleString} from './utils.js';
 import effects_descriptions from './effect_consts.js';
 
 class MeshiImage extends React.Component {
@@ -37,7 +37,7 @@ class MeshiImage extends React.Component {
                     >
                     {(UA.Mobile || UA.Tablet) ?
                         <h3 className="text-primary text-center">
-                        {language == "ja" ? "タップしてください" : "Tap Here"}
+                        {multiLocaleString(language, "タップしてください",  "Tap Here")}
                         </h3>
                         :
                         <div>
@@ -274,10 +274,17 @@ class MeshiImagePreview extends React.Component {
                 ctx.fillStyle = 'rgba(237, 215, 168, 1.0)';
                 ctx.fillRect(detailSize.x + 15, detailSize.y + 82, detailSize.width - 30, 2);
 
+                // めしネーム
                 ctx.fillStyle = "rgba(255, 250, 252, 0.8)";
                 ctx.font = "24px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
                 ctx.textAlign = "center";
                 ctx.fillText(meshiState.FoodTitle, detailSize.x + (detailSize.width/2), detailSize.y + 72);
+
+                // めしプレイス
+                ctx.fillStyle = 'rgba(237, 215, 168, 0.6)';
+                ctx.font = "16px 'YuGothic','Meiryo UI','メイリオ','Meiryo'";
+                ctx.textAlign = "center";
+                ctx.fillText(meshiState.MeshiPlace, detailSize.x + (detailSize.width/2), detailSize.y + 26);
 
                 ctx.textAlign = "left";
                 drawMeshiEffect(ctx, detailSize.x + 15, detailSize.y + 92, "1");
@@ -298,12 +305,16 @@ class MeshiImagePreview extends React.Component {
                 <ButtonGroup style={{width: "100%", marginBottom:"15px"}}>
                     <Button onClick={(e) => this.onClickRotation(e)} bsStyle="default">
                     <i className="fa fa-repeat" aria-hidden="true"></i>&nbsp;
-                    <span className="text-center">{language == "ja" ? "右に回転" : "Rotate"}</span>
+                    <span className="text-center">
+                    {multiLocaleString(language, "右に回転", "Rotate")}
+                    </span>
                     </Button>
 
                     <Button bsStyle="default" onClick={(event) => this.downloadImage(event)}>
                     <i className="fa fa-download"></i>&nbsp;
-                    <span className="text-center">{language == "ja" ? "保存用画像を生成" : "Download"}</span>
+                    <span className="text-center">
+                    {multiLocaleString(language, "保存用画像を生成", "Download")}
+                    </span>
                     </Button>
                 </ButtonGroup>
             </div>
