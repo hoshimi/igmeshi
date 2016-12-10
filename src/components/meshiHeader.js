@@ -61,6 +61,7 @@ export default class MeshiHeader extends React.Component {
                             <NavItem href="./login.php">Twitter Log in</NavItem>
                         }
                         </Nav>
+
                     </Navbar.Header>
 
                     {isTwitterLoggedIn ?
@@ -86,6 +87,12 @@ export default class MeshiHeader extends React.Component {
                         :
                         null
                     }
+                    <Navbar.Form>
+                        <ButtonGroup>
+                            <Button onClick={(e) => this.props.changeLang("ja")}>日本語</Button>
+                            <Button onClick={(e) => this.props.changeLang("en")}>English</Button>
+                        </ButtonGroup>
+                    </Navbar.Form>
                 </Navbar>
             );
         } else {
@@ -130,16 +137,16 @@ export default class MeshiHeader extends React.Component {
                         null
                     }
 
+                    <Nav>
+                        <NavItem href="https://twitter.com/hsimyu">Created By @hsimyu</NavItem>
+                    </Nav>
+
                     <Navbar.Form>
                         <ButtonGroup>
                             <Button onClick={(e) => this.props.changeLang("ja")}>日本語</Button>
                             <Button onClick={(e) => this.props.changeLang("en")}>English</Button>
                         </ButtonGroup>
                     </Navbar.Form>
-
-                    <Nav>
-                        <NavItem href="https://twitter.com/hsimyu">Created By @hsimyu</NavItem>
-                    </Nav>
                 </Navbar>
             );
         }
