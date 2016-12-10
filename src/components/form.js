@@ -30,6 +30,17 @@ class DetailForm extends React.Component {
         this.props.onChangeMeshiState(this.state);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.language != this.props.language){
+            // 言語が切り替わったら効果内容を変える
+            let newState = this.state;
+            newState["FoodTitle"] = (nextProps.language == "ja" ? "イグニスメシ" : "IGNIS MESHI");
+            this.updateEffectDesc(newState, nextProps.language);
+            this.setState(newState);
+            this.props.onChangeMeshiState(newState);
+        }
+    }
+
     generateRandomEffect(event) {
         let meshiInd, meshiLVInd;
         let newState = this.state;
@@ -52,13 +63,12 @@ class DetailForm extends React.Component {
                 newState[temp_key] = effectsLVs_raw[meshiLVInd];
             }
         }
-        this.updateEffectDesc(newState);
+        this.updateEffectDesc(newState, this.props.language);
         this.setState(newState);
         this.props.onChangeMeshiState(this.state);
     }
 
-    updateEffectDesc(newState) {
-        let language = this.props.language;
+    updateEffectDesc(newState, language) {
         if(newState["Effect1"] != "") {
             let desc = effects_descriptions[newState["Effect1"]][language].desc;
             let descAmount = effects_descriptions[newState["Effect1"]][language].amount;
@@ -89,7 +99,7 @@ class DetailForm extends React.Component {
         newState[key] = e.target.value;
 
         if(key != "FoodTitle") {
-            this.updateEffectDesc(newState);
+            this.updateEffectDesc(newState, this.props.language);
         }
 
         this.setState(newState);
