@@ -2,7 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import CanvasComponent from './canvas.js';
 import {Button, ButtonGroup} from 'react-bootstrap';
-import {UA, language} from './utils.js';
+import {UA} from './utils.js';
 import effects_descriptions from './effect_consts.js';
 
 class MeshiImage extends React.Component {
@@ -24,7 +24,7 @@ class MeshiImage extends React.Component {
     }
 
     render() {
-        const {meshiState} = this.props;
+        const {meshiState, language} = this.props;
 
         return (
         <div>
@@ -56,7 +56,7 @@ class MeshiImage extends React.Component {
                 :
                     <div>
                         <i className="fa fa-times fa-2x closeButton" aria-hidden="true" onClick={(event) => this.onClickRemoveButton(event)}></i>
-                        <MeshiImagePreview previewUrl={this.state.preview} meshiState={meshiState} />
+                        <MeshiImagePreview previewUrl={this.state.preview} meshiState={meshiState} language={language} />
                     </div>
             }
         </div>
@@ -179,7 +179,7 @@ class MeshiImagePreview extends React.Component {
         let CANVAS_WIDTH = 1920;
         let CANVAS_HEIGHT = 1920 * aspect;
 
-        const {meshiState} = this.props;
+        const {meshiState, language} = this.props;
 
         // let detailSize = {
         //     x: 3.2 * CANVAS_WIDTH/5,

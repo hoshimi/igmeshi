@@ -1,3 +1,6 @@
+import React from 'react';
+import {Button, ButtonGroup} from 'react-bootstrap';
+
 export let UA = (function(u){
   return {
     Tablet:(u.indexOf("windows") != -1 && u.indexOf("touch") != -1 && u.indexOf("tablet pc") == -1)
@@ -17,10 +20,14 @@ export let UA = (function(u){
 })(window.navigator.userAgent.toLowerCase());
 
 // 言語設定
-export let language = (window.navigator.languages && window.navigator.languages[0]) ||
-window.navigator.language ||
-window.navigator.userLanguage ||
-window.navigator.browserLanguage;
+export let getLanguage = () => {
+    let lang = (
+    (window.navigator.languages && window.navigator.languages[0]) ||
+    window.navigator.language ||
+    window.navigator.userLanguage ||
+    window.navigator.browserLanguage);
+    if(lang == "ja-jp") lang = "ja";
+    if(lang != "ja") lang = "en";
 
-if(language == "ja-jp") language = "ja";
-if(language != "ja") language = "en";
+    return lang;
+}

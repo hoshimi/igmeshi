@@ -1,16 +1,21 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {FormGroup, FormControl, Navbar, Nav, NavItem, MenuItem, Button} from 'react-bootstrap';
+import {FormGroup, FormControl, Navbar, Nav, NavItem, MenuItem, Button, ButtonGroup} from 'react-bootstrap';
 import DetailForm from './components/form.js';
 import MeshiImage from './components/meshiImage.js';
-import {UA, language} from './components/utils.js';
+import {UA, getLanguage} from './components/utils.js';
 
 class MainContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             "meshiState": {},
+            "language": getLanguage(),
         };
+    }
+
+    onChangeLang(locale) {
+        this.setState({language: locale});
     }
 
     onChangeMeshiState(newState) {
@@ -19,9 +24,9 @@ class MainContainer extends React.Component {
 
     render() {
         return <div className="mainContainer">
-                    <MeshiHeader/>
-                    <MeshiImage meshiState={this.state.meshiState} />
-                    <DetailForm onChangeMeshiState={(s) => this.onChangeMeshiState(s)} />
+                    <MeshiHeader changeLang={(locale) => this.onChangeLang(locale) } language={this.state.language} />
+                    <MeshiImage meshiState={this.state.meshiState} language={this.state.language} />
+                    <DetailForm onChangeMeshiState={(s) => this.onChangeMeshiState(s)} language={this.state.language} />
                </div>
     }
 }
@@ -70,6 +75,7 @@ class MeshiHeader extends React.Component {
     }
 
     render() {
+        const {language} = this.props;
         if(UA.Mobile || UA.Tablet){
             return (
                 <Navbar>
@@ -152,6 +158,13 @@ class MeshiHeader extends React.Component {
                         :
                         null
                     }
+
+                    <Navbar.Form>
+                        <ButtonGroup>
+                            <Button onClick={(e) => this.props.changeLang("ja")}>日本語</Button>
+                            <Button onClick={(e) => this.props.changeLang("en")}>English</Button>
+                        </ButtonGroup>
+                    </Navbar.Form>
 
                     <Nav>
                         <NavItem href="https://twitter.com/hsimyu">Created By @hsimyu</NavItem>
