@@ -258,15 +258,15 @@ class MeshiImagePreview extends React.Component {
 
                 // タイトル背景のグラデーション
                 // 横にグラデーションなのでxのみ指定
-                // ctx.beginPath();
-                // let grad = ctx.createLinearGradient(0, 0, detailSize.width - 30, 0);
-                // grad.addColorStop(0,'rgba(0, 0, 0, 0.0)');
-                // grad.addColorStop(0.5,'rgba(72, 38, 3, 0.5)');
-                // grad.addColorStop(1.0,'rgba(0, 0, 0, 0.0)');
-                //
-                // ctx.fillStyle = grad;
-                // ctx.rect(detailSize.x + 15, detailSize.y + 44, detailSize.width - 30, 35);
-                // ctx.fill();
+                ctx.beginPath();
+                let grad = ctx.createLinearGradient(detailSize.x + 15, 0, detailSize.x + detailSize.width - 30, 0);
+                grad.addColorStop(0,'rgba(0, 0, 0, 0.0)');
+                grad.addColorStop(0.5,'rgba(72, 38, 3, 1.0)');
+                grad.addColorStop(1.0,'rgba(0, 0, 0, 0.0)');
+
+                ctx.fillStyle = grad;
+                ctx.rect(detailSize.x + 15, detailSize.y + 44, detailSize.width - 30, 35);
+                ctx.fill();
 
                 // タイトル下の線
                 ctx.fillStyle = 'rgba(196, 175, 128, 1.0)';
