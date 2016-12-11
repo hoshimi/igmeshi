@@ -7,7 +7,7 @@ export default class MeshiHeader extends React.Component {
         super(props);
 
         this.state = {
-            postMessage: "#igmeshi / http://hsimyu.net/igmeshi",
+            postMessage: "#FFXVCOLLA / http://hsimyu.net/igmeshi",
             postingMessage: false,
         }
     }
